@@ -14,7 +14,7 @@
 ## we should probably assign instruments into a special namespace and create get* functions.  Jeff?
 
 is.instrument <- function( x ) {
-  x <- get(x,pos=".instrument",inherits=TRUE)
+  x <- get(x,pos=.instrument,inherits=TRUE)
   inherits( x, "instrument" )
 }
 
@@ -40,7 +40,7 @@ instrument<-function(primary_id , currency , multiplier , identifiers = NULL, ..
                         ),
                     class = tclass
                   ), # end structure
-        pos=".instrument",inherits=TRUE
+        pos=.instrument,inherits=TRUE
         )     
 }
 
@@ -54,7 +54,7 @@ stock <- function(primary_id , currency , multiplier, identifiers = NULL, ...){
                         ),
                     class=c("stock","instrument")
                   ), # end structure
-         pos=".instrument",inherits=TRUE
+         pos=.instrument,inherits=TRUE
   )
 }
 
@@ -63,7 +63,7 @@ future <- function(primary_id , currency , multiplier , identifiers = NULL, ...,
 
   if(is.null(underlying_id)) warning("underlying_id should only be NULL for cash-settled futures")
   
-  if(!exists(underlying_id, pos=".instrument",inherits=TRUE)) warning("underlying_id not found") # assumes that we know where to look
+  if(!exists(underlying_id, pos=.instrument,inherits=TRUE)) warning("underlying_id not found") # assumes that we know where to look
   ## now structure and return
   assign(primary_id, structure( list(primary_id = future_temp$primary_id,
                          currency = future_temp$currency,
@@ -73,7 +73,7 @@ future <- function(primary_id , currency , multiplier , identifiers = NULL, ...,
                         ),
                     class=c("future","instrument")
                   ), # end structure
-         pos=".instrument",inherits=TRUE
+         pos=.instrument,inherits=TRUE
   )
 }
 
@@ -101,7 +101,7 @@ future_series <- function(primary_id , suffix_id, first_traded, expires, identif
              ) # end structure
   }
 
-  assign(paste(primary_id, suffix_id), temp_series, pos=".instrument",inherits=TRUE)
+  assign(paste(primary_id, suffix_id), temp_series, pos=.instrument,inherits=TRUE)
 }
 
 option <- function(primary_id , currency , multiplier , identifiers = NULL, ..., underlying_id){
@@ -109,7 +109,7 @@ option <- function(primary_id , currency , multiplier , identifiers = NULL, ...,
 
   if(is.null(underlying_id)) warning("underlying_id should only be NULL for cash-settled options")
 
-  if(!exists(underlying_id, pos=".instrument",inherits=TRUE)) warning("underlying_id not found") # assumes that we know where to look
+  if(!exists(underlying_id, pos=.instrument,inherits=TRUE)) warning("underlying_id not found") # assumes that we know where to look
   ## now structure and return
   assign(primary_id, structure( list(primary_id = option_temp$primary_id,
                          currency = option_temp$currency,
@@ -119,7 +119,7 @@ option <- function(primary_id , currency , multiplier , identifiers = NULL, ...,
                         ),
                     class=c("option","instrument")
                   ), # end structure
-         pos=".instrument",inherits=TRUE
+         pos=.instrument,inherits=TRUE
   )
 }
 
@@ -144,11 +144,10 @@ option_series <- function(primary_id , suffix_id, first_traded, expires, identif
              ) # end structure
   }
 
-  assign(paste(primary_id, suffix_id), temp_series, pos=".instrument",inherits=TRUE)
+  assign(paste(primary_id, suffix_id), temp_series, pos=.instrument,inherits=TRUE)
 }
 
 currency <- function(primary_id , currency=NULL , multiplier=1 , identifiers = NULL, ...){
-  currency_temp = instrument(primary_id , currency=primary_id , multiplier=1 , identifiers = identifiers, ..., type="currency")
   ## now structure and return
   assign(primary_id, structure( list(primary_id = primary_id,
                          type = "currency",
@@ -158,20 +157,20 @@ currency <- function(primary_id , currency=NULL , multiplier=1 , identifiers = N
                         ),
                     class=c("currency","instrument")
                   ), # end structure
-         pos=".instrument",inherits=TRUE
+         pos=.instrument,inherits=TRUE
   )
 }
 
 is.currency <- function( x ) {
-  x <- get(x,pos=".instrument",inherits=TRUE)
+  x <- get(x,pos=.instrument,inherits=TRUE)
   inherits( x, "currency" )
 }
 
 exchange_rate <- function (primary_id , currency , second_currency, identifiers = NULL, ...){
   exchange_rate_temp = instrument(primary_id , currency , multiplier=1 , identifiers = identifiers, ..., type="exchange_rate")
 
-  if(!exists(currency, pos=".instrument",inherits=TRUE)) warning("currency not found") # assumes that we know where to look
-  if(!exists(second_currency, pos=".instrument",inherits=TRUE)) warning("second_currency not found") # assumes that we know where to look
+  if(!exists(currency, pos=.instrument,inherits=TRUE)) warning("currency not found") # assumes that we know where to look
+  if(!exists(second_currency, pos=.instrument,inherits=TRUE)) warning("second_currency not found") # assumes that we know where to look
 
   ## now structure and return
   assign(primary_id, structure( list(primary_id = primary_id,
@@ -181,10 +180,10 @@ exchange_rate <- function (primary_id , currency , second_currency, identifiers 
                         ),
                     class=c("exchange_rate","instrument")
                   ), # end structure
-         pos=".instrument",inherits=TRUE
+         pos=.instrument,inherits=TRUE
   )
 }
 
 getInstrument <- function(x){
-  get(x,pos=".instrument",inherits=TRUE)
+  get(x,pos=.instrument,inherits=TRUE)
 }
