@@ -7,7 +7,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: random_portfolios.R 1413 2009-11-10 22:50:39Z braverock $
+# $Id$
 #
 ###############################################################################
 
