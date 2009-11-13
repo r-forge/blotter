@@ -2,9 +2,7 @@
 \Rdversion{1.1}
 \alias{instrument}
 \docType{data}
-\title{
-%%   ~~ data name/kind ... ~~
-}
+\title{Instrument class model }
 \description{
 %%  ~~ A concise (1-5 lines) description of the dataset. ~~
 }
