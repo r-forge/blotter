@@ -11,6 +11,10 @@
 #
 ###############################################################################
 
+.onLoad <- function(lib, pkg) {
+    .instrument <<- new.env()
+}
+
 ## we should probably assign instruments into a special namespace and create get* functions.  Jeff?
 
 is.instrument <- function( x ) {
@@ -20,9 +24,9 @@ is.instrument <- function( x ) {
 
 instrument<-function(primary_id , currency , multiplier , identifiers = NULL, ...,type=NULL ){
   if(is.null(primary_id)) stop("you must specify a primary_id for the instrument")
-  
+
   # not sure this is correct, maybe should store the primary_id for the currency instead.  Why doesn't R have pointers?
-  if(!is.currency(currency)) stop("currency must be an object of type 'currency'") 
+  if(!is.currency(currency)) stop("currency must be an object of type 'currency'")
 
   if(!hasArg(identifiers)) identifiers = list()
 
@@ -30,7 +34,7 @@ instrument<-function(primary_id , currency , multiplier , identifiers = NULL, ..
   if(!is.numeric(multiplier) | length(multiplier) > 1) stop("multiplier must be a single number")
 
   if(is.null(type)) tclass="instrument" else tclass = c(type,"instrument")
-  
+
   ## now structure and return
   assign(primary_id, structure( list(primary_id = primary_id,
                          type = type,
@@ -41,7 +45,7 @@ instrument<-function(primary_id , currency , multiplier , identifiers = NULL, ..
                     class = tclass
                   ), # end structure
         pos=.instrument,inherits=TRUE
-        )     
+        )
 }
 
 stock <- function(primary_id , currency , multiplier, identifiers = NULL, ...){
@@ -62,7 +66,7 @@ future <- function(primary_id , currency , multiplier , identifiers = NULL, ...,
   future_temp = instrument(primary_id , currency , multiplier , identifiers = identifiers, ... , type="future" )
 
   if(is.null(underlying_id)) warning("underlying_id should only be NULL for cash-settled futures")
-  
+
   if(!exists(underlying_id, pos=.instrument,inherits=TRUE)) warning("underlying_id not found") # assumes that we know where to look
   ## now structure and return
   assign(primary_id, structure( list(primary_id = future_temp$primary_id,
@@ -82,7 +86,7 @@ future_series <- function(primary_id , suffix_id, first_traded, expires, identif
   if(!inherits(contract,"future")) stop("futures contract spec must be defined first")
 
   # TODO add check for Date equivalent in first_traded and expires
-  
+
   ## with futures series we probably need to be more sophisticated,
   ## and find the existing series from prior periods (probably years)
   ## and then add the first_traded and expires to the time series
