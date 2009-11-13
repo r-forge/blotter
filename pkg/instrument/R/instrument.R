@@ -99,13 +99,13 @@ future_series <- function(primary_id , suffix_id, first_traded, expires, identif
                          suffix_id = suffix_id,
                          first_traded = first_traded,
                          expires = expires,
-                         identifiers = identifiers,
+                         identifiers = identifiers
                         ),
                     class=c("future_series", "future", "instrument")
              ) # end structure
   }
 
-  assign(paste(primary_id, suffix_id), temp_series, pos=.instrument,inherits=TRUE)
+  assign(paste(primary_id, suffix_id, sep=""), temp_series, pos=.instrument,inherits=TRUE)
 }
 
 option <- function(primary_id , currency , multiplier , identifiers = NULL, ..., underlying_id){
@@ -142,13 +142,13 @@ option_series <- function(primary_id , suffix_id, first_traded, expires, identif
                          suffix_id = suffix_id,
                          first_traded = first_traded,
                          expires = expires,
-                         identifiers = identifiers,
+                         identifiers = identifiers
                         ),
                     class=c("option_series", "option", "instrument")
              ) # end structure
   }
 
-  assign(paste(primary_id, suffix_id), temp_series, pos=.instrument,inherits=TRUE)
+  assign(paste(primary_id, suffix_id,sep=""), temp_series, pos=.instrument,inherits=TRUE)
 }
 
 currency <- function(primary_id , currency=NULL , multiplier=1 , identifiers = NULL, ...){
