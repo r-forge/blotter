@@ -1,6 +1,7 @@
 ---
 title: Developing & Backtesting Systematic Trading Strategies
 author: Brian G. Peterson
+date: "updated `r format(Sys.time(), '%d %B %Y')`"
 bibliography: stat_process.bib
 output:
   tufte::tufte_handout 
@@ -12,8 +13,8 @@ output:
 keywords: quantitative trading, backtest, quantitative strategy, scientific method
 subject: quantitative trading, backtest, quantitative strategy, scientific method
 
-footer: Copyright 2014-2016 Brian G. Peterson CC-BY-NC-SA.  
-copyright: Copyright 2014-2016 Brian G. Peterson CC-BY-NC-SA. 
+footer: Copyright 2014-2017 Brian G. Peterson CC-BY-NC-SA.  
+copyright: Copyright 2014-2017 Brian G. Peterson CC-BY-NC-SA. 
 
 abstract: Analysts and portfolio managers face many challenges in developing new systematic trading systems.  This paper provides a detailed, repeatable process to aid in evaluating new ideas, developing those ideas into testable hypotheses, measuring results in comparable ways, and avoiding and measuring the ever-present risks of over-fitting. ^[ *Back-testing. I hate it –- it's just optimizing over history. You never see a bad back-test. Ever. In any strategy.* - Josh Diedesch[-@Diedesch2014] ]
 
@@ -1706,7 +1707,7 @@ whether you are likely to have overfit your model.
 - modifying existing expectations
 - track the number of trials
 - how do you define a 'trial'?
-- CCSV sampling
+- CSCV sampling
   - combinatorially symmetric cross validation
 "generate $S/2$ testing sets of size $T/2$ by recombining the $S$ slices of the
 overall sample of size $T$. 
